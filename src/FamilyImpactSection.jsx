@@ -407,7 +407,7 @@ export default function FamilyImpactSection() {
           an appointment.
         </h2>
         <canvas
-          className="w-full h-full"
+          className="w-full h-full bg-white"
           ref={canvasRef}
           height={720}
           width={640}
