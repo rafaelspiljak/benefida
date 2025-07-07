@@ -24,7 +24,7 @@ export const Section = memo(({ section, responses, handleChange }) => {
             {options.map((opt) => (
               <th
                 key={opt}
-                className="text-center text-[18px] font-medium text-gray-700 px-[5px] max-w-[180px] pb-6 leading-[23px] tracking-[1.5%]"
+                className="text-center text-[18px] font-medium text-gray-700 px-[5px] max-w-[180px] w-[180px] pb-6 leading-[23px] tracking-[1.5%]"
               >
                 {opt}
               </th>
@@ -38,7 +38,7 @@ export const Section = memo(({ section, responses, handleChange }) => {
                 {question}
               </td>
               {options.map((_, optIdx) => (
-                <td key={optIdx} className="text-center">
+                <td key={optIdx} className="text-center w-[180px]">
                   <input
                     type="radio"
                     name={`q-${section.label}-${qIdx}`}

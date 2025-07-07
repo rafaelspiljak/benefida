@@ -308,7 +308,7 @@ export default function FamilyImpactSection() {
   }, []);
 
   return (
-    <div className="flex gap-6 flex-col items-center">
+    <div className="flex gap-6 flex-col items-center max-w-[1380px]">
       {!submitted && (
         <>
           {sections.map((section, sectionIdx) => (
