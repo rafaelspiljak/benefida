@@ -405,6 +405,7 @@ export default function FamilyImpactSection() {
             <button
               className="rounded-full bg-[#D7EAD6] text-[18px] font-medium flex gap-2 items-center justify-between py-3 px-4 text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
               onClick={async (e) => {
+                setButtonDisabled(true);
                 e.preventDefault();
                 const levels = {};
 
@@ -457,9 +458,10 @@ export default function FamilyImpactSection() {
                 );
                 // 4. export if you like
                 const link = document.getElementById("download-portrait");
-                link.download = "layered.png";
+                link.download = "my-adhd-portrait.png";
                 link.href = canvas.toDataURL("image/png");
                 setSubmitted(true);
+                setButtonDisabled(false);
               }}
               disabled={buttonDisabled || !agreed}
             >
