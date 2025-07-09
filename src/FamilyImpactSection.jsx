@@ -360,7 +360,10 @@ export default function FamilyImpactSection() {
 
   return (
     <div className="flex gap-6 flex-col items-center max-w-[1380px] md:mb-[160px] mb-[90px] h-full">
-      <h1 className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] !mb-[66px] md:!mb-[136px]">
+      <h1
+        id="title"
+        className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] !mb-[66px] md:!mb-[136px]"
+      >
         Get your ADHD portrait
       </h1>
       {!submitted && !submitInProgress && (
@@ -410,6 +413,13 @@ export default function FamilyImpactSection() {
               className="rounded-full bg-[#D7EAD6] text-[18px] font-medium flex gap-2 items-center justify-between py-3 px-4 text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
               onClick={async (e) => {
                 setSubmitInProgress(true);
+                const scrollTarget = document.getElementById("title"); // The <h1 id="title"> element
+                if (scrollTarget) {
+                  scrollTarget.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
                 e.preventDefault();
                 const levels = {};
 
