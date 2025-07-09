@@ -4,6 +4,7 @@ import { Section } from "./Section";
 const loadImage = (src) =>
   new Promise((res, rej) => {
     const img = new Image();
+    img.crossOrigin = "anonymous"; // very important, must be set before src
     img.src = src;
     img.onload = () => res(img);
     img.onerror = () => rej(new Error(`Failed to load ${src}`));
