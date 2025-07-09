@@ -67,7 +67,7 @@ export const Section = memo(({ section, responses, handleChange }) => {
               {options.map((opt, optIdx) => (
                 <label
                   key={opt}
-                  className="flex items-center justify-between border border-[#41553E80] rounded p-3"
+                  className="!flex items-center justify-between border border-[#41553E80] rounded p-3"
                 >
                   <span className="text-[14px] font-medium text-left leading-[18px] tracking-[1.5%]">
                     {opt}
