@@ -441,8 +441,9 @@ export default function FamilyImpactSection() {
 
                 // console.log(imagePaths);
                 // 2. load them all together
-                const loadedImages = [];
-                await Promise.all(imagePaths.map(loadImage));
+                const loadedImages = await Promise.all(
+                  imagePaths.map(loadImage)
+                );
 
                 // 3. draw once, in order
                 const canvas = canvasRef.current;
