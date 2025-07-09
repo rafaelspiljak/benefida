@@ -471,6 +471,7 @@ export default function FamilyImpactSection() {
                     const input = document.createElement("input");
                     input.type = "hidden";
                     input.name = name;
+                    input["data-name"] = name;
                     form.appendChild(input);
                     input.value = value;
                   };
@@ -487,7 +488,7 @@ export default function FamilyImpactSection() {
                     });
 
                     Object.keys(levels).forEach((level) => {
-                      ensureHiddenField(`${level} - sum`, levels[level]);
+                      ensureHiddenField(`${level}-sum`, levels[level]);
                     });
                     if (form.requestSubmit) {
                       form.requestSubmit(); // preferred modern way
