@@ -337,6 +337,7 @@ export default function FamilyImpactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [submitInProgress, setSubmitInProgress] = useState(false);
 
   const handleChange = useCallback((sectionIdx, qIdx, value) => {
     setResponses((prev) => {
@@ -358,11 +359,11 @@ export default function FamilyImpactSection() {
   }, []);
 
   return (
-    <div className="flex gap-6 flex-col items-center max-w-[1380px] md:mb-[160px] mb-[90px]">
-      <h1 className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] !mb-[90px] md:!mb-[160px]">
+    <div className="flex gap-6 flex-col items-center max-w-[1380px] md:mb-[160px] mb-[90px] h-full">
+      <h1 className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] !mb-[66px] md:!mb-[136px]">
         Get your ADHD portrait
       </h1>
-      {!submitted && (
+      {!submitted && !submitInProgress && (
         <>
           {sections.map((section, sectionIdx) => (
             <Section
@@ -374,7 +375,7 @@ export default function FamilyImpactSection() {
           ))}
           <div className="flex flex-col items-center mt-8">
             <div className="flex items-center mb-6">
-              <label class="relative inline-block h-[18px] w-[18px]">
+              <label className="relative inline-block h-[18px] w-[18px]">
                 <input
                   id="privacy-policy"
                   className="peer appearance-none h-[18px] w-[18px] rounded-[4px] border border-[#D7EAD6] bg-transparent checked:bg-[#D7EAD6]"
@@ -385,7 +386,7 @@ export default function FamilyImpactSection() {
                   type="checkbox"
                 ></input>
                 <svg
-                  class="absolute left-0 top-0 h-[18px] w-[18px] hidden peer-checked:block pointer-events-none"
+                  className="absolute left-0 top-0 h-[18px] w-[18px] hidden peer-checked:block pointer-events-none"
                   viewBox="0 0 17 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -408,7 +409,7 @@ export default function FamilyImpactSection() {
             <button
               className="rounded-full bg-[#D7EAD6] text-[18px] font-medium flex gap-2 items-center justify-between py-3 px-4 text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
               onClick={async (e) => {
-                setButtonDisabled(true);
+                setSubmitInProgress(true);
                 e.preventDefault();
                 const levels = {};
 
@@ -463,8 +464,38 @@ export default function FamilyImpactSection() {
                 const link = document.getElementById("download-portrait");
                 link.download = "my-adhd-portrait.png";
                 link.href = canvas.toDataURL("image/png");
+
+                try {
+                  const form = document.getElementById("wf-form-ADHD-portrait");
+                  const ensureHiddenField = (name, value) => {
+                    const input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = name;
+                    form.appendChild(input);
+                    input.value = value;
+                  };
+                  if (form) {
+                    Object.keys(responses).forEach((response) => {
+                      Object.keys(responses[response]).forEach(
+                        (responseKey) => {
+                          ensureHiddenField(
+                            `${response}-${responseKey}`,
+                            responses[response][responseKey]
+                          );
+                        }
+                      );
+                    });
+
+                    Object.keys(levels).forEach((level) => {
+                      ensureHiddenField(`${level} - sum`, levels[level]);
+                    });
+                    form.submit();
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
                 setSubmitted(true);
-                setButtonDisabled(false);
+                setSubmitInProgress(false);
               }}
               disabled={buttonDisabled || !agreed}
             >
@@ -486,11 +517,34 @@ export default function FamilyImpactSection() {
           </div>
         </>
       )}
-
+      {submitInProgress && (
+        <div>
+          <svg
+            className="mr-3 -ml-1 size-10 animate-spin text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </div>
+      )}
       <div
         className={submitted ? "flex gap-6 flex-col items-center" : "hidden"}
       >
-        <h2 className="!text-[18px] !font-medium !text-[#D7EAD6] !leading-[23px] !tracking-[1.5%]">
+        <h2 className="!text-[18px] !font-medium !text-[#D7EAD6] !leading-[23px] !tracking-[1.5%] !mt-0">
           Here is your portrait! Feel free to download, print or even bring to
           an appointment.
         </h2>
