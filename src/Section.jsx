@@ -10,7 +10,7 @@ const options = [
 export const Section = memo(({ section, responses, handleChange }) => {
   return (
     <div className="bg-[#D7EAD6] rounded shadow p-[30px] md:p-6 w-full">
-      <h2 className="md:hidden text-[32px] text-[#41553E] text-left font-semibold mb-6">
+      <h2 className="md:hidden !text-[32px] !text-[#41553E] !text-left !font-semibold !mb-6">
         {section.label}
       </h2>
 
@@ -18,13 +18,13 @@ export const Section = memo(({ section, responses, handleChange }) => {
       <table className="hidden md:table w-full border-collapse !border-spacing-y-2">
         <thead>
           <tr>
-            <th className="text-left text-[44px] text-[#41553E] pb-6 leading-[100%] tracking-[1.5%]">
+            <th className="!text-left !text-[44px] text-[#41553E] !pb-6 !leading-[100%] !tracking-[1.5%]">
               {section.label}
             </th>
             {options.map((opt) => (
               <th
                 key={opt}
-                className="text-center text-[18px] font-medium text-gray-700 px-[5px] max-w-[180px] w-[180px] pb-6 leading-[23px] tracking-[1.5%]"
+                className="text-center text-[18px] font-medium text-gray-700 px-[5px] max-w-[180px] w-[180px] !pb-6 !leading-[23px] !tracking-[1.5%]"
               >
                 {opt}
               </th>
@@ -34,7 +34,7 @@ export const Section = memo(({ section, responses, handleChange }) => {
         <tbody>
           {section.questions.map((question, qIdx) => (
             <tr key={question} className="border-t border-[#41553E80]">
-              <td className="py-6 pr-4 text-[18px] font-medium text-gray-800 text-left leading-[23px] tracking-[1.5%]">
+              <td className="!py-6 !pr-4 !text-[18px] !font-medium !text-gray-800 !text-left !leading-[23px] !tracking-[1.5%]">
                 {question}
               </td>
               {options.map((_, optIdx) => (

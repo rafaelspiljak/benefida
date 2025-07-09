@@ -358,7 +358,10 @@ export default function FamilyImpactSection() {
   }, []);
 
   return (
-    <div className="flex gap-6 flex-col items-center max-w-[1380px]">
+    <div className="flex gap-6 flex-col items-center max-w-[1380px] md:mb-[160px] mb-[90px]">
+      <h1 className="md:!text-[74px] md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] mb-[90px] md:mb-[160px]">
+        Get your ADHD portrait
+      </h1>
       {!submitted && (
         <>
           {sections.map((section, sectionIdx) => (
@@ -487,7 +490,7 @@ export default function FamilyImpactSection() {
       <div
         className={submitted ? "flex gap-6 flex-col items-center" : "hidden"}
       >
-        <h2 className="text-[18px] font-medium text-[#D7EAD6] leading-[23px] tracking-[1.5%]">
+        <h2 className="!text-[18px] !font-medium !text-[#D7EAD6] !leading-[23px] !tracking-[1.5%]">
           Here is your portrait! Feel free to download, print or even bring to
           an appointment.
         </h2>
