@@ -489,7 +489,12 @@ export default function FamilyImpactSection() {
                     Object.keys(levels).forEach((level) => {
                       ensureHiddenField(`${level} - sum`, levels[level]);
                     });
-                    form.submit();
+                    if (form.requestSubmit) {
+                      form.requestSubmit(); // preferred modern way
+                    } else {
+                      form.querySelector('input[type="submit"]').click(); // fallback
+                      console.log("fallback");
+                    }
                   }
                 } catch (e) {
                   console.error(e);
