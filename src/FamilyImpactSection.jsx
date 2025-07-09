@@ -497,7 +497,7 @@ export default function FamilyImpactSection() {
         ></canvas>
         <a
           id="download-portrait"
-          download={"portrait.png"}
+          download={"my-adhd-portrait.png"}
           className="rounded-full !bg-[#D7EAD6] text-[18px] font-medium flex gap-2 items-center justify-between py-3 px-4 text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
         >
           Download
