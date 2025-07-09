@@ -15,7 +15,7 @@ export const Section = memo(({ section, responses, handleChange }) => {
       </h2>
 
       {/* Desktop / tablet matrix */}
-      <table className="hidden md:table w-full border-collapse border-spacing-y-2">
+      <table className="hidden md:table w-full border-collapse !border-spacing-y-2">
         <thead>
           <tr>
             <th className="text-left text-[44px] text-[#41553E] pb-6 leading-[100%] tracking-[1.5%]">
