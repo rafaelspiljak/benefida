@@ -359,7 +359,7 @@ export default function FamilyImpactSection() {
 
   return (
     <div className="flex gap-6 flex-col items-center max-w-[1380px] md:mb-[160px] mb-[90px]">
-      <h1 className="md:!text-[74px] md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] mb-[90px] md:mb-[160px]">
+      <h1 className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] !mb-[90px] md:!mb-[160px]">
         Get your ADHD portrait
       </h1>
       {!submitted && (
@@ -399,7 +399,7 @@ export default function FamilyImpactSection() {
 
               <label
                 htmlFor="privacy-policy"
-                className="text-[#D7EAD6] ml-2 leading-[18px] tracking-[1.5%]"
+                className="!text-[#D7EAD6] !ml-2 !leading-[18px] !tracking-[1.5%] !font-medium"
               >
                 I have read and agree to the{" "}
                 <a href="/privacy-policy">Privacy Policy.</a>
@@ -503,7 +503,7 @@ export default function FamilyImpactSection() {
         <a
           id="download-portrait"
           download={"my-adhd-portrait.png"}
-          className="rounded-full !bg-[#D7EAD6] text-[18px] font-medium flex gap-2 items-center justify-between py-3 px-4 text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
+          className="rounded-full !bg-[#D7EAD6] !text-[18px] !font-medium flex gap-2 items-center justify-between py-3 px-4 !text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
         >
           Download
           <svg
