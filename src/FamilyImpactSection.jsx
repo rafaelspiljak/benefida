@@ -400,7 +400,7 @@ export default function FamilyImpactSection() {
               }
             />
           ))}
-          <div className="flex flex-col ">
+          <div className="flex flex-col mt-[30px]">
             <div className="form-line">
               <input
                 className="input-field form w-input"
@@ -436,7 +436,7 @@ export default function FamilyImpactSection() {
             </div>
             <div>
               <input
-                className="custom-input"
+                className="input-field form w-input"
                 value={userInfo.email}
                 placeholder="Email *"
                 maxLength="256"
@@ -571,8 +571,8 @@ export default function FamilyImpactSection() {
                         }
                       );
                     });
-                    ensureHiddenField("First Name", userInfo.firstName);
-                    ensureHiddenField("Sur Name", userInfo.surName);
+                    ensureHiddenField("FirstName", userInfo.firstName);
+                    ensureHiddenField("SurName", userInfo.surName);
                     ensureHiddenField("Email", userInfo.email);
 
                     Object.keys(levels).forEach((level) => {
