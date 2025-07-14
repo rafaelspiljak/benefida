@@ -458,8 +458,6 @@ export default function FamilyImpactSection() {
                 }}
               />
             </div>
-          </div>
-          <div className="flex flex-col items-center mt-8">
             <div className="flex items-center mb-6">
               <label className="relative inline-block h-[18px] w-[18px]">
                 <input
@@ -492,6 +490,8 @@ export default function FamilyImpactSection() {
                 <a href="/privacy-policy">Privacy Policy.</a>
               </label>
             </div>
+          </div>
+          <div className="flex flex-col items-center">
             <button
               className="rounded-full bg-[#D7EAD6] text-[18px] font-medium flex gap-2 items-center justify-between py-3 px-4 text-[#41553E] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none outline-none hover:outline-none"
               onClick={async (e) => {
