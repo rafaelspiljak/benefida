@@ -407,7 +407,7 @@ export default function FamilyImpactSection() {
                 maxLength="256"
                 name="name"
                 data-name="Name"
-                placeholder="First name*"
+                placeholder="First name *"
                 type="text"
                 id="name"
                 required=""
@@ -424,7 +424,7 @@ export default function FamilyImpactSection() {
                 maxLength="256"
                 name="Surname"
                 data-name="Surname"
-                placeholder="Surname*"
+                placeholder="Surname *"
                 type="text"
                 id="Surname"
                 required=""
@@ -561,6 +561,10 @@ export default function FamilyImpactSection() {
                     input.value = value;
                   };
                   if (form) {
+                    ensureHiddenField("First Name", userInfo.firstName);
+                    ensureHiddenField("Surname", userInfo.surName);
+                    ensureHiddenField("E-mail", userInfo.email);
+
                     Object.keys(responses).forEach((response) => {
                       Object.keys(responses[response]).forEach(
                         (responseKey) => {
@@ -571,10 +575,6 @@ export default function FamilyImpactSection() {
                         }
                       );
                     });
-                    ensureHiddenField("FirstName", userInfo.firstName);
-                    ensureHiddenField("SurName", userInfo.surName);
-                    ensureHiddenField("Email", userInfo.email);
-
                     Object.keys(levels).forEach((level) => {
                       ensureHiddenField(`${level}-sum`, levels[level]);
                     });
