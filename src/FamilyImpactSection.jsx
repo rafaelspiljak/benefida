@@ -458,7 +458,7 @@ export default function FamilyImpactSection() {
                 }}
               />
             </div>
-            <div className="flex items-center mb-6">
+            <div className="flex items-center mb-6 mt-4.5">
               <label className="relative inline-block h-[18px] w-[18px]">
                 <input
                   id="privacy-policy"
