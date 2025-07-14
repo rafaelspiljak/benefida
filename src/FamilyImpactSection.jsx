@@ -504,7 +504,6 @@ export default function FamilyImpactSection() {
                       form.requestSubmit(); // preferred modern way
                     } else {
                       form.querySelector('input[type="submit"]').click(); // fallback
-                      console.log("fallback");
                     }
                   }
                 } catch (e) {
@@ -565,10 +564,10 @@ export default function FamilyImpactSection() {
           an appointment.
         </h2>
         <canvas
-          className="w-full h-full bg-white"
+          className="w-full h-full bg-white max-w-[640px] max-h-[720px] object-contain"
           ref={canvasRef}
-          height={720}
-          width={640}
+          height={3508}
+          width={2481}
         ></canvas>
         <a
           id="download-portrait"
