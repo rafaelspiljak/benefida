@@ -381,10 +381,18 @@ export default function FamilyImpactSection() {
     <div className="flex gap-6 flex-col items-center max-w-[1380px] md:mb-[160px] mb-[90px] h-full">
       <h1
         id="title"
-        className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6] !mb-[66px] md:!mb-[136px]"
+        className="md:!text-[74px] !font-medium md:!leading-[84px] !text-[40px] !leading-[48px] tracking-[1.5%] !text-[#D7EAD6]"
       >
         Get your ADHD portrait
       </h1>
+      <h3 className="max-w-[630px] !text-center !text-[18px] !leading-[23px] !tracking-[1.5#] !text-[#D7EAD6] !mb-[66px] md:!mb-[136px] mt-9 !font-medium">
+        The WEISS questionnaire helps us understand how ADHD affects different
+        areas of your life and is used to support the diagnostic process. Your
+        responses will also enable us to create a personalized ADHD portrait,
+        designed by an illustrator, just for you. Rest assured, all information
+        you provide will be kept confidential and handled in line with privacy
+        standards.
+      </h3>
       {!submitted && !submitInProgress && (
         <>
           {sections.map((section, sectionIdx) => (
