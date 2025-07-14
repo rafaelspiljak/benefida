@@ -31,7 +31,7 @@ const questions = [
 const sections = [
   {
     label: "A",
-    title: "A FAMILY",
+    title: "Family",
     questions: [
       "Having problems with family",
       "Having problems with spouse/partner",
@@ -47,7 +47,7 @@ const sections = [
   },
   {
     label: "B",
-    title: "B WORK",
+    title: "Work",
     questions: [
       "Problems performing required duties",
       "Problems with getting your work done efficiently",
@@ -67,7 +67,7 @@ const sections = [
   },
   {
     label: "C",
-    title: "C SCHOOL",
+    title: "School",
     questions: [
       "Problems taking notes",
       "Problems completing assignments",
@@ -87,7 +87,7 @@ const sections = [
   },
   {
     label: "D",
-    title: "D LIFE SKILLS",
+    title: "Life Skills",
     questions: [
       "Excessive or inappropriate use of internet, video games or TV",
       "Problems keeping an acceptable appearance",
@@ -107,7 +107,7 @@ const sections = [
   },
   {
     label: "E",
-    title: "E SELF-CONCEPT",
+    title: "Self-Concept",
     questions: [
       "Feeling bad about yourself",
       "Feeling frustrated with yourself",
@@ -120,7 +120,7 @@ const sections = [
   },
   {
     label: "F",
-    title: "F SOCIAL",
+    title: "Social",
     questions: [
       "Getting into arguments",
       "Trouble cooperating",
@@ -137,7 +137,7 @@ const sections = [
   },
   {
     label: "G",
-    title: "G RISK",
+    title: "Risk",
     questions: [
       "Aggressive driving",
       "Doing other things while driving",
@@ -338,6 +338,12 @@ export default function FamilyImpactSection() {
   const [agreed, setAgreed] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [submitInProgress, setSubmitInProgress] = useState(false);
+  const [sectorsFilled, setSectorsFilled] = useState([]);
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    surName: "",
+    email: "",
+  });
 
   const handleChange = useCallback((sectionIdx, qIdx, value) => {
     setResponses((prev) => {
@@ -346,12 +352,25 @@ export default function FamilyImpactSection() {
         [sectionIdx]: { ...prev[sectionIdx], [qIdx]: value },
       };
       const shouldBeDisabled = Object.keys(newState).reduce((pr, cu) => {
-        return (
-          pr ||
-          Object.keys(cu).reduce((prev, curr) => {
-            return prev || newState[cu][curr] === undefined;
-          }, false)
+        const empty = Object.keys(newState[cu]).reduce((prev, curr) => {
+          return prev || newState[cu][curr] === undefined;
+        }, false);
+        const indexInSection = sections.findIndex(
+          (a) => a.label === sectionIdx
         );
+
+        if (
+          !empty &&
+          sections?.[indexInSection]?.questions?.length ===
+            Object.keys(newState[sectionIdx]).length
+        ) {
+          setSectorsFilled((prevSectors) => {
+            return prevSectors.includes(cu)
+              ? prevSectors
+              : [...prevSectors, cu];
+          });
+        }
+        return pr || empty;
       }, false);
       setButtonDisabled(shouldBeDisabled);
       return newState;
@@ -374,8 +393,64 @@ export default function FamilyImpactSection() {
               section={section}
               responses={responses}
               handleChange={handleChange}
+              isActive={
+                sectionIdx === 0 ||
+                (sectionIdx &&
+                  sectorsFilled.includes(sections[sectionIdx - 1].label))
+              }
             />
           ))}
+          <div className="flex flex-col ">
+            <div className="form-line">
+              <input
+                className="input-field form w-input"
+                maxLength="256"
+                name="name"
+                data-name="Name"
+                placeholder="First name*"
+                type="text"
+                id="name"
+                required=""
+                value={userInfo.firstName}
+                onChange={(e) => {
+                  setUserInfo((prev) => ({
+                    ...prev,
+                    firstName: e.target.value,
+                  }));
+                }}
+              />
+              <input
+                className="input-field form w-input"
+                maxLength="256"
+                name="Surname"
+                data-name="Surname"
+                placeholder="Surname*"
+                type="text"
+                id="Surname"
+                required=""
+                value={userInfo.surName}
+                onChange={(e) => {
+                  setUserInfo((prev) => ({ ...prev, surName: e.target.value }));
+                }}
+              />
+            </div>
+            <div>
+              <input
+                className="custom-input"
+                value={userInfo.email}
+                placeholder="Email *"
+                maxLength="256"
+                name="Email"
+                data-name="Email"
+                type="text"
+                id="Email"
+                required=""
+                onChange={(e) => {
+                  setUserInfo((prev) => ({ ...prev, email: e.target.value }));
+                }}
+              />
+            </div>
+          </div>
           <div className="flex flex-col items-center mt-8">
             <div className="flex items-center mb-6">
               <label className="relative inline-block h-[18px] w-[18px]">
@@ -496,6 +571,9 @@ export default function FamilyImpactSection() {
                         }
                       );
                     });
+                    ensureHiddenField("First Name", userInfo.firstName);
+                    ensureHiddenField("Sur Name", userInfo.surName);
+                    ensureHiddenField("Email", userInfo.email);
 
                     Object.keys(levels).forEach((level) => {
                       ensureHiddenField(`${level}-sum`, levels[level]);
@@ -512,7 +590,13 @@ export default function FamilyImpactSection() {
                 setSubmitted(true);
                 setSubmitInProgress(false);
               }}
-              disabled={buttonDisabled || !agreed}
+              disabled={
+                buttonDisabled ||
+                !agreed ||
+                !userInfo.firstName ||
+                !userInfo.surName ||
+                !userInfo.email
+              }
             >
               Generate your portrait
               <svg
@@ -546,7 +630,7 @@ export default function FamilyImpactSection() {
               cy="12"
               r="10"
               stroke="currentColor"
-              stroke-width="4"
+              strokeWidth="4"
             ></circle>
             <path
               className="opacity-75"
